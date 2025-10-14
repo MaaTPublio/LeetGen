@@ -50,11 +50,21 @@ while True:
 resultado = gerar_variacoes(entradas)
 
 # Salvar no arquivo com data/hora
-nome_arquivo = f"senhas_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.txt"
-with open(nome_arquivo, "w") as arq:
-    for s in resultado:
-        arq.write(s + "\n")
+respostaArquivo = input("Deseja salvar as senhas em um arquivo? (s/n): ").lower().strip()
+if respostaArquivo == "s":
+    nome_arquivo = f"senhas_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.txt"
+    with open(nome_arquivo, "w", encoding="utf-8") as arq:
+        for s in resultado:
+            arq.write(s + "\n")
 
-print(f"\nForam geradas {len(resultado)} senhas.")
-print(f"Arquivo salvo como: {nome_arquivo}")
-input("\nPressione ENTER para sair...")
+    print(f"\nForam geradas {len(resultado)} senhas.")
+    print(f"Arquivo salvo como: {nome_arquivo}")
+    input("\nPressione ENTER para sair...")
+elif respostaArquivo == "n":
+    print(f"\nForam geradas {len(resultado)} senhas.")
+    for i in resultado:
+        print(i)
+    input("\nPressione ENTER para sair...")
+else:
+    print("Resposta inválida")
+    input("\nPressione ENTER para sair...")
